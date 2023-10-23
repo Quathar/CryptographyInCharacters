@@ -20,62 +20,66 @@ class SolutionTest {
         assertEquals("ikhwmvi", Kata.encode("deargod", "fgh"));
         assertEquals("IQlOirL", Kata.encode("ALaBamA", "hoME"));
     }
+    
     @Test
     void basicDecodeTest() {
-    	assertEquals("abcde",   Kata.decode("moqik", "abcde"));
-    	assertEquals("ABCDE",   Kata.decode("KMOQS", "ABCDE"));
-    	assertEquals("DEARGOD", Kata.decode("GIFUKTG", "FGH"));
-    	assertEquals("deargod", Kata.decode("ikhwmvi", "fgh"));
-    	assertEquals("ALaBamA", Kata.decode("IQlOirL", "hoME"));	
+        assertEquals("abcde",   Kata.decode("moqik", "abcde"));
+        assertEquals("ABCDE",   Kata.decode("KMOQS", "ABCDE"));
+        assertEquals("DEARGOD", Kata.decode("GIFUKTG", "FGH"));
+        assertEquals("deargod", Kata.decode("ikhwmvi", "fgh"));
+        assertEquals("ALaBamA", Kata.decode("IQlOirL", "hoME"));
     }
 
     @Test
     void specialCasesTest() {
-        assertEquals("", Kata.encode("", ""));
-        assertEquals("", Kata.decode("", ""));
-        assertEquals("", Kata.encode(null, null));
-        assertEquals("", Kata.decode(null, null));
-        assertEquals("", Kata.encode("", null));
-        assertEquals("", Kata.decode("", null));
-        assertEquals("", Kata.encode(null, ""));
-        assertEquals("", Kata.decode(null, ""));
+        assertEquals("", Kata.encode("", ""), "ERROR: Check encode method");
+        assertEquals("", Kata.decode("", ""), "ERROR: Check decode method");
+        assertEquals("", Kata.encode(null, null), "ERROR: Check encode method");
+        assertEquals("", Kata.decode(null, null), "ERROR: Check decode method");
+        assertEquals("", Kata.encode("", null), "ERROR: Check encode method");
+        assertEquals("", Kata.decode("", null), "ERROR: Check decode method");
+        assertEquals("", Kata.encode(null, ""), "ERROR: Check encode method");
+        assertEquals("", Kata.decode(null, ""), "ERROR: Check decode method");
         
         // There is no key to encrypt
-        assertEquals("TernaryLove",  Kata.encode("TernaryLove", ""));
-        assertEquals("TernaryLove",  Kata.decode("TernaryLove", ""));
-        assertEquals("IntelliJCrew", Kata.encode("IntelliJCrew", null));
-        assertEquals("IntelliJCrew", Kata.decode("IntelliJCrew", null));
+        assertEquals("TernaryLove",  Kata.encode("TernaryLove", ""), "ERROR: Check encode method");
+        assertEquals("TernaryLove",  Kata.decode("TernaryLove", ""), "ERROR: Check decode method");
+        assertEquals("IntelliJCrew", Kata.encode("IntelliJCrew", null), "ERROR: Check encode method");
+        assertEquals("IntelliJCrew", Kata.decode("IntelliJCrew", null), "ERROR: Check decode method");
         
         // There is no phrase to encrypt
-        assertEquals("", Kata.encode("", "abcde"));
-        assertEquals("", Kata.decode("", "abcde"));
-        assertEquals("", Kata.encode(null, "IlikeBreakInLoops"));
-        assertEquals("", Kata.decode(null, "IlikeBreakInLoops"));
+        assertEquals("", Kata.encode("", "abcde"), "ERROR: Check encode method");
+        assertEquals("", Kata.decode("", "abcde"), "ERROR: Check decode method");
+        assertEquals("", Kata.encode(null, "IlikeBreakInLoops"), "ERROR: Check encode method");
+        assertEquals("", Kata.decode(null, "IlikeBreakInLoops"), "ERROR: Check decode method");
     }
 
     @Test
-    void simpleOverflowTest() {
+    void simpleOverflowEncodeTest() {
         assertEquals("CEEpB",      Kata.encode("turbo", "TUXON"));
-        assertEquals("turbo",      Kata.decode("CEEpB", "TUXON"));
         assertEquals("skstzCvzwj", Kata.encode("helloworld", "afgh"));
-        assertEquals("helloworld", Kata.decode("skstzCvzwj", "afgh"));
         assertEquals("IKM",        Kata.encode("xyz", "ijklmn"));
-        assertEquals("xyz",        Kata.decode("IKM", "ijklmn"));
         assertEquals("qUlWuZXovQ", Kata.encode("gOdMoRNinG", "uSA"));
-        assertEquals("gOdMoRNinG", Kata.decode("qUlWuZXovQ", "uSA"));
-
         assertEquals("BOywIJdrzafbLMKuCnVqNt", Kata.encode("wElovETerNaRyExpsaNdIj", "dAvID"));
+    }
+
+    @Test
+    void simpleOverflowDecodeTest() {
+        assertEquals("turbo",      Kata.decode("CEEpB", "TUXON"));
+        assertEquals("helloworld", Kata.decode("skstzCvzwj", "afgh"));
+        assertEquals("xyz",        Kata.decode("IKM", "ijklmn"));
+        assertEquals("gOdMoRNinG", Kata.decode("qUlWuZXovQ", "uSA"));
         assertEquals("wElovETerNaRyExpsaNdIj", Kata.decode("BOywIJdrzafbLMKuCnVqNt", "dAvID"));
     }
 
     @Test
     void intermediateOverflowTest() {
-        assertEquals("rhCRDjxXEVyfu", Kata.encode("hOmEsWeEtHoMe", "nOtSoSwEeT"));
-        assertEquals("hOmEsWeEtHoMe", Kata.decode("rhCRDjxXEVyfu", "nOtSoSwEeT"));
-        assertEquals("cyvNMxgiVt",    Kata.encode("WonDErWaLl", "oASiS"));
-        assertEquals("WonDErWaLl",    Kata.decode("cyvNMxgiVt", "oASiS"));
-        assertEquals("lyynmpA",       Kata.encode("Zumbido", "wow"));
-        assertEquals("Zumbido",       Kata.decode("lyynmpA", "wow"));
+        assertEquals("rhCRDjxXEVyfu", Kata.encode("hOmEsWeEtHoMe", "nOtSoSwEeT"), "ERROR: Check encode method");
+        assertEquals("hOmEsWeEtHoMe", Kata.decode("rhCRDjxXEVyfu", "nOtSoSwEeT"), "ERROR: Check decode method");
+        assertEquals("cyvNMxgiVt",    Kata.encode("WonDErWaLl", "oASiS"), "ERROR: Check encode method");
+        assertEquals("WonDErWaLl",    Kata.decode("cyvNMxgiVt", "oASiS"), "ERROR: Check decode method");
+        assertEquals("lyynmpA",       Kata.encode("Zumbido", "wow"), "ERROR: Check encode method");
+        assertEquals("Zumbido",       Kata.decode("lyynmpA", "wow"), "ERROR: Check decode method");
     }
 
     private Random random = new Random();
@@ -91,24 +95,24 @@ class SolutionTest {
     void randomEasyModeTest() {
         String phrase = generateString(0, 100);
         String key    = generateString(0, 17);
-        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key),"Error in encode method");
-        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key),"Error in encode method");
+        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key), "ERROR: Check encode method");
+        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key), "ERROR: Check decode method");
     }
 
     @RepeatedTest(250)
     void randomHardModeTest() {
         String phrase = generateString(1000, 15000);
         String key    = generateString(10, 17);
-        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key),"Error in encode method");
-        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key),"Error in encode method");
+        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key), "ERROR: Check encode method");
+        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key), "ERROR: Check decode method");
     }
 
     @RepeatedTest(100)
     void randomGodModeTest() {
         String phrase = generateString(89000, 90000);
         String key    = generateString(15, 17);
-        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key),"Error in encode method");
-        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key),"Error in encode method");
+        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key), "ERROR: Check encode method");
+        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key), "ERROR: Check decode method");
     }
     
     private static class Solution {
