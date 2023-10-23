@@ -85,7 +85,7 @@ class SolutionTest {
     private Random random = new Random();
 
     String generateString(int lowerBound, int upperBound) {
-        return IntStream.rangeClosed(random.nextInt(lowerBound + 1), random.nextInt(upperBound + 1))
+        return IntStream.rangeClosed(random.nextInt(lowerBound), random.nextInt(upperBound))
                 .mapToObj(i -> random.nextInt(2) == 0 ? random.nextInt('A', 'Z' + 1) : random.nextInt('a', 'z' + 1))
                 .collect(StringBuilder::new, (sb, code) -> sb.append((char) code.intValue()), StringBuilder::append)
                 .toString();
@@ -93,8 +93,8 @@ class SolutionTest {
 
     @RepeatedTest(500)
     void randomEasyModeTest() {
-        String phrase = generateString(0, 100);
-        String key    = generateString(0, 17);
+        String phrase = generateString(1, 100);
+        String key    = generateString(1, 17);
         assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key), "ERROR: Check encode method");
         assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key), "ERROR: Check decode method");
     }
