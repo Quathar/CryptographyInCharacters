@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Kata {
-
+    
     // <<-CONSTANT->>
-    private static final int INTERMEDIATE_OFFSET = 'a' - 'Z' + 1;
+    private static final int INTERMEDIATE_OFFSET = 'a' - 'Z' - 1;
     
     // <<-METHODS->>
     private static int getLastDigit(final int digit) {
@@ -41,15 +41,19 @@ public class Kata {
                     int current  = phraseChars.get(i);
                     int result   = current + offsets.get(keyIndex);
                     
+                    // Range jump without detection
                     if (current <= 'Z' && result >= 'a') {
                         int offset = result - 'Z';
                         result = 'a' + offset - 1;
                     }
 
+                    // Intermediate overflow
                     if (result > 'Z' && result < 'a') {
                         result += INTERMEDIATE_OFFSET;
+                    // Simple overflow
                     } else if (result > 'z') {
-                        result = result - 'z' + 'A' - 1;
+                        int offset = result - 'z';
+                        result = 'A' + offset - 1;
                     }
                     
                     return result;
@@ -70,13 +74,16 @@ public class Kata {
                     int current  = phraseChars.get(i);
                     int result   = current - offsets.get(keyIndex);
                     
+                    // Range jump without detection
                     if (current >= 'a' && result <= 'Z') {
                         int offset = 'a' - result;
                         result = 'Z' - offset + 1;
                     }
 
+                    // Intermediate overflow
                     if (result < 'a' && result > 'Z') {
                         result -= INTERMEDIATE_OFFSET;
+                    // Simple overflow
                     } else if (result < 'A') {
                         int offset = 'A' - result;
                         result = 'z' - offset + 1;

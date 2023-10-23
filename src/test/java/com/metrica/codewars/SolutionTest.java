@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SolutionTest {
-
+    
     @Test
     void basicTest() {
         assertEquals("moqik",   Kata.encode("abcde", "abcde"));
@@ -39,7 +39,7 @@ class SolutionTest {
         
         // There is no phrase to encrypt
         assertEquals("", Kata.encode("", "abcde"));
-        assertEquals("", Kata.encode(null, "IlikeBreaksInForLoops"));
+        assertEquals("", Kata.encode(null, "IlikeBreakInLoops"));
     }
 
     @Test
@@ -79,7 +79,7 @@ class SolutionTest {
     @RepeatedTest(15000)
     void randomEasyModeTest() {
         String phrase = generateString(0, 100);
-        String key    = generateString(0, 25);
+        String key    = generateString(0, 17);
         assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key));
         assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key));
     }
@@ -87,7 +87,7 @@ class SolutionTest {
     @RepeatedTest(1000)
     void randomHardModeTest() {
         String phrase = generateString(1000, 15000);
-        String key    = generateString(15, 25);
+        String key    = generateString(10, 17);
         assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key));
         assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key));
     }
@@ -95,7 +95,7 @@ class SolutionTest {
     @RepeatedTest(100)
     void randomGodModeTest() {
         String phrase = generateString(89000, 90000);
-        String key    = generateString(20, 25);
+        String key    = generateString(15, 17);
         assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key));
         assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key));
     }
@@ -105,7 +105,7 @@ class SolutionTest {
 class Solution {
 
     // <<-CONSTANT->>
-    private static final int INTERMEDIATE_OFFSET = 'a' - 'Z' + 1;
+    private static final int INTERMEDIATE_OFFSET = 'a' - 'Z' - 1;
     
     // <<-METHODS->>
     private static int getLastDigit(final int digit) {

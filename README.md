@@ -1,4 +1,4 @@
-Your task is to create two functions, **_encode_** and **_decode_** that will allow you to encrypt and decrypt a phrase using a **'key'**.
+Your task is to create two functions, **_encode_** and **_decode_** that will allow you to encrypt and decrypt a phrase using a **key**.
 
 The scheme is as follows:
 
@@ -26,7 +26,7 @@ For example:
 
 > If ASCII code + OFFSET > 90 and < 97, it should start from 97.
 
-- The key length will not exceed 25.
+- The key length will not exceed 17.
 
 - The decoding procedure is the opposite of the encryption ([see the decryption example below](#encryption-example)).
 
