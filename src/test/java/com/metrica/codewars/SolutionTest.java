@@ -13,33 +13,44 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SolutionTest {
     
     @Test
-    void basicTest() {
+    void basicEncodeTest() {
         assertEquals("moqik",   Kata.encode("abcde", "abcde"));
-        assertEquals("abcde",   Kata.decode("moqik", "abcde"));
         assertEquals("KMOQS",   Kata.encode("ABCDE", "ABCDE"));
-        assertEquals("ABCDE",   Kata.decode("KMOQS", "ABCDE"));
         assertEquals("GIFUKTG", Kata.encode("DEARGOD", "FGH"));
-        assertEquals("DEARGOD", Kata.decode("GIFUKTG", "FGH"));
         assertEquals("ikhwmvi", Kata.encode("deargod", "fgh"));
-        assertEquals("deargod", Kata.decode("ikhwmvi", "fgh"));
         assertEquals("IQlOirL", Kata.encode("ALaBamA", "hoME"));
-        assertEquals("ALaBamA", Kata.decode("IQlOirL", "hoME"));
+    }
+    @Test
+    void basicDecodeTest() {
+    	assertEquals("abcde",   Kata.decode("moqik", "abcde"));
+    	assertEquals("ABCDE",   Kata.decode("KMOQS", "ABCDE"));
+    	assertEquals("DEARGOD", Kata.decode("GIFUKTG", "FGH"));
+    	assertEquals("deargod", Kata.decode("ikhwmvi", "fgh"));
+    	assertEquals("ALaBamA", Kata.decode("IQlOirL", "hoME"));	
     }
 
     @Test
     void specialCasesTest() {
         assertEquals("", Kata.encode("", ""));
+        assertEquals("", Kata.decode("", ""));
         assertEquals("", Kata.encode(null, null));
+        assertEquals("", Kata.decode(null, null));
         assertEquals("", Kata.encode("", null));
+        assertEquals("", Kata.decode("", null));
         assertEquals("", Kata.encode(null, ""));
+        assertEquals("", Kata.decode(null, ""));
         
         // There is no key to encrypt
         assertEquals("TernaryLove",  Kata.encode("TernaryLove", ""));
+        assertEquals("TernaryLove",  Kata.decode("TernaryLove", ""));
         assertEquals("IntelliJCrew", Kata.encode("IntelliJCrew", null));
+        assertEquals("IntelliJCrew", Kata.decode("IntelliJCrew", null));
         
         // There is no phrase to encrypt
         assertEquals("", Kata.encode("", "abcde"));
+        assertEquals("", Kata.decode("", "abcde"));
         assertEquals("", Kata.encode(null, "IlikeBreakInLoops"));
+        assertEquals("", Kata.decode(null, "IlikeBreakInLoops"));
     }
 
     @Test
@@ -80,24 +91,24 @@ class SolutionTest {
     void randomEasyModeTest() {
         String phrase = generateString(0, 100);
         String key    = generateString(0, 17);
-        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key));
-        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key));
+        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key),"Error in encode method");
+        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key),"Error in encode method");
     }
 
     @RepeatedTest(250)
     void randomHardModeTest() {
         String phrase = generateString(1000, 15000);
         String key    = generateString(10, 17);
-        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key));
-        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key));
+        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key),"Error in encode method");
+        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key),"Error in encode method");
     }
 
     @RepeatedTest(100)
     void randomGodModeTest() {
         String phrase = generateString(89000, 90000);
         String key    = generateString(15, 17);
-        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key));
-        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key));
+        assertEquals(Solution.encode(phrase, key), Kata.encode(phrase, key),"Error in encode method");
+        assertEquals(Solution.decode(phrase, key), Kata.decode(phrase, key),"Error in encode method");
     }
     
     private static class Solution {
